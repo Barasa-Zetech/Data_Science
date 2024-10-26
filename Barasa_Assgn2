@@ -1,0 +1,85 @@
+Solution;
+1.	Hypothetical Data:
+Dependent variables;
+i.	accident_severity: This could be a numerical representation of the severity of the accident, e.g., 0 for minor, 1 for moderate, 2 for severe and 3 for fatal.
+Independent variables;
+i.	speed_limit: Means the speed limit of the road where the accident occurred, e.g., 10km/hr, 50km/hr, 100km/hr, 80km/hr.
+ii.	weather_condition: It is encoded as integers such as 1 for clear, 2 for rainy, 3 for foggy.
+iii.	road_condition: It is also encoded as integers like 1 for dry and 2 for wet.
+iv.	time_of_day: It is encoded as integers representing the hour of the day (morning, afternoon and evening), e.g., 15 for 3PM.
+v.	vehicle_type: Includes car, truck and motorcycle.
+vi.	traffic_volume: It is the number of vehicles on the road.
+vii.	driver_behavior: Includes age, speeding, driving while drunk and distracted driving.
+viii.	temperature: High temperatures can cause road surfaces to soften or become slick, especially if there are oil residues, reducing tire traction and increase the likelihood of accidents. Also, high temperatures leads to overheating of vehicle components, such as engines and brakes while low temperatures can affect vehicle performance, such as reduced battery efficiency, tire pressure fluctuations and increased risk of mechanical failures. Includes low, moderate and high temperatures.
+2.	Code example:
+# Creating a hypothetical data and Preprocess
+import pandas as pd
+
+# Create a hypothetical dataset
+Road = pd.DataFrame({
+    'weather': ['Clear', 'Rainy', 'Foggy', 'Clear', 'Rainy', 'Foggy'],
+    'time_of_day': ['Morning', 'Afternoon', 'Evening', 'Night', 'Morning', 'Afternoon'],
+    'road_type': ['Highway', 'Urban', 'Rural', 'Highway', 'Urban', 'Rural'],
+    'vehicle_type': ['Car', 'Truck', 'Motorcycle', 'Car', 'Car', 'Truck'],
+    'traffic_volume': [30, 50, 20, 10, 40, 25],
+    'accident_severity': [1, 2, 3, 1, 2, 3]  # 1: Minor, 2: Serious, 3: Fatal
+})
+
+# Preprocess the data
+
+Road = pd.get_dummies(Road, columns=['weather', 'time_of_day', 'road_type', 'vehicle_type'], drop_first=True)
+
+
+
+
+#Load the  hypothetical data
+import pandas as pd
+import matplotlib.pyplot as plt
+from sklearn.linear_model import LinearRegression
+Road = pd.read_csv('/content/Road.csv')
+
+# Define predictor (independent) and target (dependent) variables
+X = Road('Number_of_Casualities')  # Independent variables
+y = Road['Accident_Severity_Score']  # Dependent variable
+
+# Visualize the change in the variables 
+Road.plot(x = 'Number_of_Casualities', y = 'Accident_Severity_Score', style = '0')
+plt.xlabel('Number of Casuality')
+plt.ylabel('Accident Severity Score')
+plt.title('Scatter Plot of Number of Casualities vs Accident Severity Score')
+plt.show()
+
+# Create and fit the linear regression model
+regressor = LinearRegression()
+regressor.fit(X, y)
+
+# Plot the data points and the regression line
+plt.scatter(x, y, color = 'blue', label = 'Data Points')
+plt.plot(x, regressor.predict(x), color = 'red', linewidth = 2, label = 'Regression Line')
+plt.xlabel('Number of Casualities')
+plt.ylabel('Accident Severity Score')
+plt.title('Linear Regression: Number of Casualities vs Accident Severity Score')
+plt.legend()
+plt.show()
+
+# Predicting Accident Severity
+The output value e.g., 2.32, is a continuous prediction that suggests the severity of the accident based on the given conditions. You can round off this value to the nearest whole number or categorize it based on predefined thresholds (e.g., 0-3 scale) to interpret it as: 
+i.	0 = Minor
+ii.	1 = Moderate
+iii.	2 = Severe
+iv.	3 = Fatal
+
+# Save the model for future use
+joblib.dump(Road, ‘Accident_Severity_Score.pk1’) 
+
+# GITHUB URL link
+https://github.com/Barasa-Zetech/Python_Library/blob/main/Barasa_Assign2
+
+ 
+
+The model can help traffic accident analysis in underdeveloped countries in various ways including;
+i.	Scenario analysis: When the input values are adjusted (e.g., increasing traffic volume or changing weather conditions), you can analyze how different factors influence accident severity.
+ii.	Resource allocation: Authorities can use the model to predict high-severity accident zones based on road conditions and weather patterns thereby, allowing them to allocate resources more effectively.
+iii.	Prevention strategies: By understanding the key factors that lead to severe accidents (e.g., high speed or bad weather), authorities can implement preventive measures such as traffic calming in dangerous areas or issuing weather advisories.
+iv.	Policy development: Data-driven models can help governments make informed decisions about road safety laws, speed limits and emergency response systems.
+	
