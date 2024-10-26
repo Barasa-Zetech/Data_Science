@@ -39,7 +39,7 @@ from sklearn.linear_model import LinearRegression
 Road = pd.read_csv('/content/Road.csv')
 
 # Define predictor (independent) and target (dependent) variables
-X = Road('Number_of_Casualities')  # Independent variables
+X = Road['Number_of_Casualities']  # Independent variables
 y = Road['Accident_Severity_Score']  # Dependent variable
 
 # Visualize the change in the variables 
